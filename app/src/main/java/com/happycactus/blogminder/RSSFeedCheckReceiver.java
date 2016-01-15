@@ -12,6 +12,9 @@ import android.support.v4.app.NotificationCompat;
  * Created by antony on 13/01/16.
  */
 public class RSSFeedCheckReceiver extends BroadcastReceiver {
+    String mContentTitle = "WRITE A POST!";
+    String mContentText = "You haven't posted any content in a while";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
@@ -20,8 +23,8 @@ public class RSSFeedCheckReceiver extends BroadcastReceiver {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+                        .setContentTitle(mContentTitle)
+                        .setContentText(mContentText);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);
         mBuilder.setAutoCancel(true);
