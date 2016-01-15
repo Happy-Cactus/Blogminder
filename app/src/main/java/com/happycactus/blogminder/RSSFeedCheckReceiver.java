@@ -8,9 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
-/**
- * Created by antony on 13/01/16.
- */
 public class RSSFeedCheckReceiver extends BroadcastReceiver {
     String mContentTitle = "WRITE A POST!";
     String mContentText = "You haven't posted any content in a while";
