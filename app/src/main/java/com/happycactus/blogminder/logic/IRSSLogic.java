@@ -6,6 +6,6 @@ import java.util.Calendar;
 
 public interface IRSSLogic {
     Calendar LastPostDate(Xml Feed);
-    boolean FeedValid(Xml Feed);
+    boolean FeedValid(String FeedString);
     Xml GetFeed(String FeedUrl);
 }
