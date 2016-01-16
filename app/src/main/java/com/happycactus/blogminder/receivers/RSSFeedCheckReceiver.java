@@ -1,4 +1,4 @@
-package com.happycactus.blogminder;
+package com.happycactus.blogminder.receivers;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -7,6 +7,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+
+import com.happycactus.blogminder.R;
+import com.happycactus.blogminder.activities.MainActivity;
+
 
 public class RSSFeedCheckReceiver extends BroadcastReceiver {
     String mContentTitle = "WRITE A POST!";

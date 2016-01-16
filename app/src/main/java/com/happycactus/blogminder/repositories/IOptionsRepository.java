@@ -1,4 +1,4 @@
-package com.happycactus.blogminder;
+package com.happycactus.blogminder.repositories;
 
 import java.util.Calendar;
 

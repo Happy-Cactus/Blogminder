@@ -1,4 +1,4 @@
-package com.happycactus.blogminder;
+package com.happycactus.blogminder.activities;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.happycactus.blogminder.R;
+import com.happycactus.blogminder.receivers.RSSFeedCheckReceiver;
 
 import java.util.GregorianCalendar;
 
