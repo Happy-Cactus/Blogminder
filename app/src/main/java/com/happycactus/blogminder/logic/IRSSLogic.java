@@ -1,8 +1,11 @@
 package com.happycactus.blogminder.logic;
 
+import android.util.Xml;
+
 import java.util.Calendar;
 
 public interface IRSSLogic {
-    Calendar LastPostDate(String FeedUrl);
-    boolean FeedValid(String FeedUrl);
+    Calendar LastPostDate(Xml Feed);
+    boolean FeedValid(Xml Feed);
+    Xml GetFeed(String FeedUrl);
 }
