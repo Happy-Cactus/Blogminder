@@ -1,20 +1,34 @@
 package com.happycactus.blogminder.logic;
 
-import android.util.Xml;
+import com.happycactus.blogminder.models.RSSFeed;
+import com.happycactus.blogminder.models.RSSItem;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class LiveRSSLogic implements IRSSLogic{
-    //http://www.tutorialspoint.com/android/android_rss_reader.htm
 
     @Override
-    public Calendar LastPostDate(Xml Feed) {
-        return null;
+    public Calendar LastPostDate(RSSFeed Feed) {
+        try {
+            RSSItem lastItem = Feed.Items.get(0);
+            String timeString = lastItem.Timestamp.replace("Z", "+00:00");
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat =
+                    new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ssZ", Locale.UK);
+            calendar.setTime(simpleDateFormat.parse(timeString));
+            return calendar;
+        }
+        catch(Exception ex){
+            return null;
+        }
     }
 
     @Override
@@ -23,23 +37,63 @@ public class LiveRSSLogic implements IRSSLogic{
     }
 
     @Override
-    public String GetFeedString(String FeedUrl) {
+    public RSSFeed GetRSSFeed(String FeedUrl) {
         try{
+            RSSFeed rssFeed = new RSSFeed();
+
             URL url = new URL(FeedUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            BufferedReader bufferedReader =
-                    new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while((line = bufferedReader.readLine()) != null){
-                stringBuilder.append(line);
+            connection.connect();
+
+            InputStream stream = connection.getInputStream();
+            XmlPullParserFactory xmlFactory = XmlPullParserFactory.newInstance();
+            XmlPullParser xmlParser = xmlFactory.newPullParser();
+
+            xmlParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            xmlParser.setInput(stream, null);
+
+            int xmlEvent;
+            String text = "";
+
+            try{
+                xmlEvent = xmlParser.getEventType();
+
+                while(xmlEvent != XmlPullParser.END_DOCUMENT){
+                    RSSItem item = new RSSItem();
+                    String name = xmlParser.getName();
+
+                    switch(xmlEvent){
+                        case XmlPullParser.START_TAG:
+                            break;
+
+                        case XmlPullParser.TEXT:
+                            text = xmlParser.getText();
+                            break;
+
+                        case XmlPullParser.END_TAG:
+                            if(name == "title"){
+                                item.Title = text;
+                            }
+                            else if (name == "dc:date") {
+                                item.Timestamp = text;
+                            }
+                            break;
+                    }
+
+                    rssFeed.Items.add(item);
+                    xmlEvent = xmlParser.next();
+                }
             }
-            bufferedReader.close();
-            return stringBuilder.toString();
+            catch(Exception ex){
+
+            }
+
+            return rssFeed;
+
         }
         catch(Exception ex){
-            return "";
+            return null;
         }
     }
 }

@@ -1,11 +1,13 @@
 package com.happycactus.blogminder.logic;
 
-import com.happycactus.blogminder.models.RSSItem;
+import com.happycactus.blogminder.models.RSSFeed;
 
 import java.util.Calendar;
 
 public interface IRSSLogic {
-    Calendar LastPostDate(RSSItem item);
+    Calendar LastPostDate(RSSFeed Feed);
     boolean FeedValid(String FeedString);
-    String GetFeedString(String FeedUrl);
+    RSSFeed GetRSSFeed(String FeedUrl);
+
+
 }
