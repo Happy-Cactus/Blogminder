@@ -23,7 +23,7 @@ public class LiveRSSLogic implements IRSSLogic{
     }
 
     @Override
-    public Xml GetFeed(String FeedUrl) {
+    public String GetFeedString(String FeedUrl) {
         try{
             URL url = new URL(FeedUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -36,7 +36,7 @@ public class LiveRSSLogic implements IRSSLogic{
                 stringBuilder.append(line);
             }
             bufferedReader.close();
-
+            return stringBuilder.toString();
         }
         catch(IOException ex){
 
