@@ -38,12 +38,8 @@ public class LiveRSSLogic implements IRSSLogic{
             bufferedReader.close();
             return stringBuilder.toString();
         }
-        catch(IOException ex){
-
+        catch(Exception ex){
+            return "";
         }
-
-
-
-        return null;
     }
 }
