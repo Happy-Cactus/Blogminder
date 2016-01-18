@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         Intent alarmIntent = new Intent(this, RSSFeedCheckReceiver.class);
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, time,
+        alarmManager.setInexactRepeating(AlarmManager.RTC,
+                AlarmManager.INTERVAL_DAY,
+                AlarmManager.INTERVAL_DAY,
                 PendingIntent.getBroadcast(this, 1, alarmIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT));
 

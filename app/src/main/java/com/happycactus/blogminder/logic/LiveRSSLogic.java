@@ -30,7 +30,7 @@ public class LiveRSSLogic implements IRSSLogic{
 
     @Override
     public boolean FeedValid(String FeedString) {
-        return false;
+        return true;
     }
 
     @Override
