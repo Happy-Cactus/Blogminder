@@ -1,10 +1,12 @@
 package com.happycactus.blogminder.repositories;
 
-import java.util.Calendar;
+import org.joda.time.DateTime;
 
 public interface IOptionsRepository {
-    Calendar GetNextDeadline(Calendar From, int NumberOfDays);
-    void SetNextDeadLine(Calendar Deadline);
+    DateTime GetNextDeadline(DateTime From, int NumberOfDays);
+    void SetNextDeadLine(DateTime Deadline);
+    void SetPublishDateNodeName(String PublishDateNodeName);
+    String GetPublishDateNodeName();
     String GetRSSFeedUrl();
-    String SetRSSFeedUrl(String RSSFeedUrl);
+    void SetRSSFeedUrl(String RSSFeedUrl);
 }

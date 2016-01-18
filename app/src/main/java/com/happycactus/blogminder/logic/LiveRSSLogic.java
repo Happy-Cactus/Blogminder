@@ -2,7 +2,9 @@ package com.happycactus.blogminder.logic;
 
 import com.happycactus.blogminder.models.RSSFeed;
 import com.happycactus.blogminder.models.RSSItem;
+import com.happycactus.blogminder.repositories.IOptionsRepository;
 
+import org.joda.time.DateTime;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -16,15 +18,10 @@ import java.util.Locale;
 public class LiveRSSLogic implements IRSSLogic{
 
     @Override
-    public Calendar LastPostDate(RSSFeed Feed) {
+    public DateTime LastPostDate(RSSFeed Feed) {
         try {
             RSSItem lastItem = Feed.Items.get(0);
-            String timeString = lastItem.Timestamp.replace("Z", "+00:00");
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat simpleDateFormat =
-                    new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ssZ", Locale.UK);
-            calendar.setTime(simpleDateFormat.parse(timeString));
-            return calendar;
+            return new DateTime(lastItem.Timestamp);
         }
         catch(Exception ex){
             return null;
@@ -37,11 +34,11 @@ public class LiveRSSLogic implements IRSSLogic{
     }
 
     @Override
-    public RSSFeed GetRSSFeed(String FeedUrl) {
+    public RSSFeed GetRSSFeed(IOptionsRepository optionsRepository) {
         try{
             RSSFeed rssFeed = new RSSFeed();
 
-            URL url = new URL(FeedUrl);
+            URL url = new URL(optionsRepository.GetRSSFeedUrl());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
@@ -55,6 +52,7 @@ public class LiveRSSLogic implements IRSSLogic{
 
             int xmlEvent;
             String text = "";
+            String pubNode = optionsRepository.GetPublishDateNodeName();
 
             try{
                 xmlEvent = xmlParser.getEventType();
@@ -75,7 +73,10 @@ public class LiveRSSLogic implements IRSSLogic{
                             if(name == "title"){
                                 item.Title = text;
                             }
-                            else if (name == "dc:date") {
+                            else if(name == "link"){
+                                item.Link = text;
+                            }
+                            else if (name == pubNode) {
                                 item.Timestamp = text;
                             }
                             break;
