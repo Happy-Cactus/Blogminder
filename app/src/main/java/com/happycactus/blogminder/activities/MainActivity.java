@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.happycactus.blogminder.R;
 import com.happycactus.blogminder.receivers.RSSFeedCheckReceiver;
 
+import org.joda.time.DateTime;
+
 import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,15 +26,25 @@ public class MainActivity extends AppCompatActivity {
     public void setAlarm(View v){
         Long time = new GregorianCalendar().getTimeInMillis() + 60 * 1000;
 
+        DateTime time1 = DateTime.now();
+
         Intent alarmIntent = new Intent(this, RSSFeedCheckReceiver.class);
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC,
-                AlarmManager.INTERVAL_DAY,
-                AlarmManager.INTERVAL_DAY,
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME,
+                1000 * 60 * (1 / 2), //Get time until 8am.
+                1000 * 60 * 1,
                 PendingIntent.getBroadcast(this, 1, alarmIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT));
 
         Toast.makeText(this, "Alarm Scheduled for 1 min", Toast.LENGTH_LONG).show();
+    }
+
+    public void cancelAlarm(View v){
+        Intent alarmIntent = new Intent(this, RSSFeedCheckReceiver.class);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.cancel(PendingIntent.getBroadcast(this, 1, alarmIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT));
     }
 }
