@@ -21,10 +21,23 @@ public class OptionsDatabaseHelper extends SQLiteOpenHelper {
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "Name TEXT," +
                     "Value TEXT);");
+
+        insertOption(db, "TimeToCheck", "0800"); //Default to 8 am
+        insertOption(db, "Interval", Integer.toString(1000 * 60 * 60 * 24)); //Default to once a day
+        insertOption(db, "FeedUrl", "http://antonychurch.co.uk/blog/feed");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    private void insertOption(SQLiteDatabase db, String OptionName, String OptionValue){
+        db.execSQL("INSERT INTO " +
+                OPTIONS_TABLE +
+                " (Name, Value) " +
+                "VALUES (" +
+                OptionName + "," +
+                OptionValue + ");");
     }
 }

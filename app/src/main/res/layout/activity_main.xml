@@ -18,14 +18,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Set Repeating Notification"
         android:id="@+id/button"
         android:onClick="setAlarm" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Cancel Repeating Notification"
         android:id="@+id/button2"
         android:onClick="cancelAlarm" />
 </LinearLayout>

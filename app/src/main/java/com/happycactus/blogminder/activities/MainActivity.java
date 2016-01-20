@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 PendingIntent.getBroadcast(this, 1, alarmIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT));
 
-        Toast.makeText(this, "Alarm Scheduled for 1 min", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Alarm Scheduled for 8 am", Toast.LENGTH_LONG).show();
     }
 
     public void cancelAlarm(View v){
@@ -53,5 +53,7 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         alarmManager.cancel(PendingIntent.getBroadcast(this, 1, alarmIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT));
+
+        Toast.makeText(this, "Alarm Unscheduled", Toast.LENGTH_LONG).show();
     }
 }
