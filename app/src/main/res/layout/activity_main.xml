@@ -13,19 +13,83 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Check Frequency"
+        android:id="@+id/textView" />
 
-    <Button
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Repeating Notification"
-        android:id="@+id/button"
-        android:onClick="setAlarm" />
+        android:id="@+id/checkFrequencySpinner" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel Repeating Notification"
-        android:id="@+id/button2"
-        android:onClick="cancelAlarm" />
+        android:text="Check Time"
+        android:id="@+id/textView2" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkHourSpinner"
+            android:layout_weight="50" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkMinuteSpinner"
+            android:layout_weight="50" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feed URL"
+        android:id="@+id/textView3" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/feedUrlEditText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date Node"
+        android:id="@+id/textView4" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateNodeNameEditText" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Alarm"
+            android:id="@+id/setAlarmButton"
+            android:onClick="setAlarm"
+            android:layout_weight="50"
+            android:background="#42b837" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel Alarm"
+            android:id="@+id/cancelAlarmButton"
+            android:onClick="cancelAlarm"
+            android:layout_weight="50"
+            android:background="#b13333" />
+    </LinearLayout>
+
 </LinearLayout>
