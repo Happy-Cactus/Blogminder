@@ -19,7 +19,8 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkFrequencySpinner" />
+        android:id="@+id/checkFrequencySpinner"
+        android:entries="@array/check_frequencies"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,13 +37,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/checkHourSpinner"
-            android:layout_weight="50" />
+            android:layout_weight="50"
+            android:entries="@array/hours"/>
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/checkMinuteSpinner"
-            android:layout_weight="50" />
+            android:layout_weight="50"
+            android:entries="@array/minutes"/>
 
     </LinearLayout>
 
@@ -71,7 +74,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
         <Button
             android:layout_width="wrap_content"

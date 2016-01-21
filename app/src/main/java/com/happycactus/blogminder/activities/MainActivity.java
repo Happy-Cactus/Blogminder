@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 PendingIntent.getBroadcast(this, 1, alarmIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT));
 
-        Toast.makeText(this, "Alarm Scheduled for 8 am", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, Long.toString(timeUntil8am.getMillis()), Toast.LENGTH_LONG).show();
     }
 
     public void cancelAlarm(View v){
