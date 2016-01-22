@@ -1,6 +1,7 @@
 package com.happycactus.blogminder.logic;
 
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
 
 import java.util.Calendar;
 
@@ -21,6 +22,6 @@ public class LiveApplicationLogic implements IApplicationLogic {
 
     @Override
     public long getMillisecondsBetweenTimes(DateTime TargetTime, DateTime FromTime) {
-        return 0;
+        return new Duration(FromTime, TargetTime).getMillis();
     }
 }
