@@ -1,7 +1,8 @@
 package com.happycactus.blogminder.logic;
 
-import java.util.Calendar;
+import org.joda.time.DateTime;
 
 public interface IApplicationLogic {
-    boolean IsLastPostDateBeforeNextDeadLine(Calendar LastPost, Calendar Deadline);
+    boolean IsLastPostDateBeforeNextDeadLine(DateTime LastPost, DateTime Deadline);
+    long getMillisecondsBetweenTimes(DateTime TargetTime, DateTime FromTime);
 }

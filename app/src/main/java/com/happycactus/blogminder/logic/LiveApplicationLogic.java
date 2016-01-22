@@ -1,12 +1,13 @@
 package com.happycactus.blogminder.logic;
 
+import org.joda.time.DateTime;
+
 import java.util.Calendar;
 
 public class LiveApplicationLogic implements IApplicationLogic {
+
     @Override
-    public boolean IsLastPostDateBeforeNextDeadLine(Calendar LastPost, Calendar Deadline) {
-        //If LastPost or Deadline is null return true.
-        //This will stop the application notifying the user every time the alarm is checked.
+    public boolean IsLastPostDateBeforeNextDeadLine(DateTime LastPost, DateTime Deadline) {
         if(LastPost == null){
             return true;
         }
@@ -14,7 +15,12 @@ public class LiveApplicationLogic implements IApplicationLogic {
             return true;
         }
         else{
-            return LastPost.before(Deadline);
+            return LastPost.isBefore(Deadline);
         }
+    }
+
+    @Override
+    public long getMillisecondsBetweenTimes(DateTime TargetTime, DateTime FromTime) {
+        return 0;
     }
 }
