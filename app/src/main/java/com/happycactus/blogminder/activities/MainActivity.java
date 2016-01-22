@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setAlarm(View v){
-        Long time = new GregorianCalendar().getTimeInMillis() + 60 * 1000;
-
         DateTime now = DateTime.now();
         MutableDateTime target = MutableDateTime.now();
         target.addDays(1);

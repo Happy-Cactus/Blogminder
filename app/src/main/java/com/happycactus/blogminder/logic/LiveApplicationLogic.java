@@ -7,17 +7,10 @@ import java.util.Calendar;
 
 public class LiveApplicationLogic implements IApplicationLogic {
 
+
     @Override
-    public boolean IsLastPostDateBeforeNextDeadLine(DateTime LastPost, DateTime Deadline) {
-        if(LastPost == null){
-            return true;
-        }
-        else if(Deadline == null){
-            return true;
-        }
-        else{
-            return LastPost.isBefore(Deadline);
-        }
+    public boolean newPostNeeded(DateTime LastPost, DateTime Deadline, int Range) {
+        return false;
     }
 
     @Override

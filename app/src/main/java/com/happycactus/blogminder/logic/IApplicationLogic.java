@@ -3,6 +3,6 @@ package com.happycactus.blogminder.logic;
 import org.joda.time.DateTime;
 
 public interface IApplicationLogic {
-    boolean IsLastPostDateBeforeNextDeadLine(DateTime LastPost, DateTime Deadline);
+    boolean newPostNeeded(DateTime LastPost, DateTime Deadline, int Range);
     long getMillisecondsBetweenTimes(DateTime TargetTime, DateTime FromTime);
 }
