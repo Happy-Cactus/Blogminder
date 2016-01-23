@@ -3,6 +3,7 @@ package com.happycactus.blogminder.repositories;
 import android.content.Context;
 
 import com.happycactus.blogminder.database.OptionsDatabaseHelper;
+import com.happycactus.blogminder.models.PostFrequency;
 
 import org.joda.time.DateTime;
 
@@ -51,6 +52,16 @@ public class SQLiteOptionsRepository implements IOptionsRepository {
 
     @Override
     public void SetRange(int Range) {
+
+    }
+
+    @Override
+    public PostFrequency GetPostFrequency() {
+        return null;
+    }
+
+    @Override
+    public void SetPostFrequency(PostFrequency Frequency) {
 
     }
 }
