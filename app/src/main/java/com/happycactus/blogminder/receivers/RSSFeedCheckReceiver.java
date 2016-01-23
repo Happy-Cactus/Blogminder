@@ -10,16 +10,29 @@ import android.support.v4.app.NotificationCompat;
 
 import com.happycactus.blogminder.R;
 import com.happycactus.blogminder.activities.MainActivity;
+import com.happycactus.blogminder.logic.IApplicationLogic;
+import com.happycactus.blogminder.logic.IRSSLogic;
+import com.happycactus.blogminder.logic.LiveApplicationLogic;
+import com.happycactus.blogminder.logic.LiveRSSLogic;
+import com.happycactus.blogminder.repositories.IOptionsRepository;
+import com.happycactus.blogminder.repositories.SQLiteOptionsRepository;
 
 
 public class RSSFeedCheckReceiver extends BroadcastReceiver {
-    String mContentTitle = "WRITE A POST!";
-    String mContentText = "You haven't posted any content in a while";
+    private String mContentTitle = "WRITE A POST!";
+    private String mContentText = "You haven't posted any content in a while";
+    private IApplicationLogic mApplicationLogic;
+    private IRSSLogic mRSSLogic;
+    private IOptionsRepository mOptionsRepository;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
                 new Intent(context, MainActivity.class), 0);
+
+        mApplicationLogic = new LiveApplicationLogic();
+        mRSSLogic = new LiveRSSLogic();
+        mOptionsRepository = new SQLiteOptionsRepository(context);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)

@@ -43,4 +43,14 @@ public class SQLiteOptionsRepository implements IOptionsRepository {
     public void SetRSSFeedUrl(String RSSFeedUrl) {
 
     }
+
+    @Override
+    public int GetRange() {
+        return 0;
+    }
+
+    @Override
+    public void SetRange(int Range) {
+
+    }
 }

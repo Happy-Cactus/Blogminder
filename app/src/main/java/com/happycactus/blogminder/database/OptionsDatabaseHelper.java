@@ -25,6 +25,7 @@ public class OptionsDatabaseHelper extends SQLiteOpenHelper {
         insertOption(db, "TimeToCheck", "0800"); //Default to 8 am
         insertOption(db, "Interval", Integer.toString(1000 * 60 * 60 * 24)); //Default to once a day
         insertOption(db, "FeedUrl", "http://antonychurch.co.uk/blog/feed");
+        insertOption(db, "Range", "2");
     }
 
     @Override

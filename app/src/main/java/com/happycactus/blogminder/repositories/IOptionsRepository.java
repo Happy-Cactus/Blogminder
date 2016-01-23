@@ -9,4 +9,6 @@ public interface IOptionsRepository {
     String GetPublishDateNodeName();
     String GetRSSFeedUrl();
     void SetRSSFeedUrl(String RSSFeedUrl);
+    int GetRange();
+    void SetRange(int Range);
 }
