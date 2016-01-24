@@ -5,7 +5,7 @@ import com.happycactus.blogminder.models.PostFrequency;
 import org.joda.time.DateTime;
 
 public interface IOptionsRepository {
-    DateTime GetNextDeadline(DateTime From, int NumberOfDays);
+    DateTime GetNextDeadline();
     void SetNextDeadLine(DateTime Deadline);
     void SetPublishDateNodeName(String PublishDateNodeName);
     String GetPublishDateNodeName();

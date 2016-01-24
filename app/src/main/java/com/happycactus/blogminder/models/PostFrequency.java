@@ -6,5 +6,5 @@ package com.happycactus.blogminder.models;
 public enum PostFrequency {
     Weekly,
     Fortnightly,
-    Yearly
+    Monthly
 }
