@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 public interface IRSSLogic {
     DateTime LastPostDate(RSSFeed Feed);
     boolean FeedValid(String FeedString);
-    RSSFeed GetRSSFeed(IOptionsRepository optionsRepository);
+    RSSFeed GetRSSFeed(String FeedUrl, String NodeName);
 
 
 }

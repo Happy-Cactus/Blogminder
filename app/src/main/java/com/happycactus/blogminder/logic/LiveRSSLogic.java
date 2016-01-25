@@ -34,11 +34,11 @@ public class LiveRSSLogic implements IRSSLogic{
     }
 
     @Override
-    public RSSFeed GetRSSFeed(IOptionsRepository optionsRepository) {
+    public RSSFeed GetRSSFeed(String FeedUrl, String NodeName) {
         try{
             RSSFeed rssFeed = new RSSFeed();
 
-            URL url = new URL(optionsRepository.GetRSSFeedUrl());
+            URL url = new URL(FeedUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
@@ -52,7 +52,7 @@ public class LiveRSSLogic implements IRSSLogic{
 
             int xmlEvent;
             String text = "";
-            String pubNode = optionsRepository.GetPublishDateNodeName();
+            String pubNode = NodeName
 
             try{
                 xmlEvent = xmlParser.getEventType();
