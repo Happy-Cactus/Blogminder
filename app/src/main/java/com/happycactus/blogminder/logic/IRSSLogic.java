@@ -9,6 +9,4 @@ public interface IRSSLogic {
     DateTime LastPostDate(RSSFeed Feed);
     boolean FeedValid(String FeedString);
     RSSFeed GetRSSFeed(String FeedUrl, String NodeName);
-
-
 }

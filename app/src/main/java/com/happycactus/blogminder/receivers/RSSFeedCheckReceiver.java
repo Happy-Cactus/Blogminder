@@ -14,8 +14,11 @@ import com.happycactus.blogminder.logic.IApplicationLogic;
 import com.happycactus.blogminder.logic.IRSSLogic;
 import com.happycactus.blogminder.logic.LiveApplicationLogic;
 import com.happycactus.blogminder.logic.LiveRSSLogic;
+import com.happycactus.blogminder.models.RSSFeed;
 import com.happycactus.blogminder.repositories.IOptionsRepository;
 import com.happycactus.blogminder.repositories.SQLiteOptionsRepository;
+
+import org.joda.time.DateTime;
 
 
 public class RSSFeedCheckReceiver extends BroadcastReceiver {
@@ -34,16 +37,25 @@ public class RSSFeedCheckReceiver extends BroadcastReceiver {
         mRSSLogic = new LiveRSSLogic();
         mOptionsRepository = new SQLiteOptionsRepository(context);
 
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle(mContentTitle)
-                        .setContentText(mContentText);
-        mBuilder.setContentIntent(contentIntent);
-        mBuilder.setDefaults(Notification.DEFAULT_SOUND);
-        mBuilder.setAutoCancel(true);
-        NotificationManager mNotificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(1, mBuilder.build());
+        String feedUrl = mOptionsRepository.GetRSSFeedUrl();
+        String nodeName = mOptionsRepository.GetPublishDateNodeName();
+        RSSFeed feed = mRSSLogic.GetRSSFeed(feedUrl, nodeName);
+        DateTime lastPostDate = mRSSLogic.LastPostDate(feed);
+        DateTime deadline = mOptionsRepository.GetNextDeadline();
+        int range = mOptionsRepository.GetRange();
+
+        if(mApplicationLogic.newPostNeeded(lastPostDate, deadline, range)){
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(context)
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle(mContentTitle)
+                            .setContentText(mContentText);
+            mBuilder.setContentIntent(contentIntent);
+            mBuilder.setDefaults(Notification.DEFAULT_SOUND);
+            mBuilder.setAutoCancel(true);
+            NotificationManager mNotificationManager =
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(1, mBuilder.build());
+        }
     }
 }

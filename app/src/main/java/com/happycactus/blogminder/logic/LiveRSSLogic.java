@@ -52,7 +52,7 @@ public class LiveRSSLogic implements IRSSLogic{
 
             int xmlEvent;
             String text = "";
-            String pubNode = NodeName
+            String pubNode = NodeName;
 
             try{
                 xmlEvent = xmlParser.getEventType();
